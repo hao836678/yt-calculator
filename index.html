@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate YouTube Money & Revenue Calculator (2026)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">📊</span>
+                <span class="font-bold text-xl tracking-tight text-slate-900">YTCalc<span class="text-red-600">Pro</span></span>
+            </div>
+            <span class="text-sm bg-red-50 text-red-600 font-semibold px-3 py-1 rounded-full">Free Tool</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
+        <div class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">YouTube Money Calculator</h1>
+            <p class="text-slate-500 text-lg">Estimate your daily, monthly, and yearly earnings based on views and CPM.</p >
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Daily Video Views: <span id="views-val" class="text-red-600 font-bold">50,000</span></label>
+                    <input type="range" id="views" min="1000" max="1000000" step="1000" value="50000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600">
+                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>1K</span><span>500K</span><span>1M</span></div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Estimated CPM ($): <span id="cpm-val" class="text-red-600 font-bold">4.00</span></label>
+                    <input type="range" id="cpm" min="0.5" max="20" step="0.5" value="4" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600">
+                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>$0.5</span><span>$10</span><span>$20</span></div>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 Quick Info</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">CPM (Cost Per Mille) is the amount an advertiser pays per 1,000 views. US/UK traffic usually ranges from $4-$15, while Asian traffic might be $1-$3.</p >
+                </div>
+            </div>
+
+            <div class="bg-slate-900 text-white p-6 rounded-xl flex flex-col justify-between space-y-6">
+                <div>
+                    <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Estimated Earnings</h2>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-800 p-3 rounded-lg">
+                            <span class="block text-xs text-slate-400">Daily</span>
+                            <span id="res-day" class="text-lg md:text-xl font-bold text-green-400">$200</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-lg">
+                            <span class="block text-xs text-slate-400">Monthly</span>
+                            <span id="res-month" class="text-lg md:text-xl font-bold text-green-400">$6,000</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-lg">
+                            <span class="block text-xs text-slate-400">Yearly</span>
+                            <span id="res-year" class="text-lg md:text-xl font-bold text-green-400">$73,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-800 pt-4">
+                    <p class="text-xs text-slate-400 leading-relaxed">Note: These figures are estimates. Actual YouTube earnings vary based on video monetization rate (usually 50%-70% of total views), viewer location, and ad blockers.</p >
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-400">
+        <p>&copy; 2026 YTCalcPro. All rights reserved. Built for global creators.</p >
+    </footer>
+
+    <script>
+        const viewsInput = document.getElementById('views');
+        const cpmInput = document.getElementById('cpm');
+        
+        const viewsVal = document.getElementById('views-val');
+        const cpmVal = document.getElementById('cpm-val');
+        
+        const resDay = document.getElementById('res-day');
+        const resMonth = document.getElementById('res-month');
+        const resYear = document.getElementById('res-year');
+
+        function calculateEarnings() {
+            const views = parseFloat(viewsInput.value);
+            const cpm = parseFloat(cpmInput.value);
+
+            // 行业标准算法：假定 60% 的播放量成功展示了广告 (Monetized Views Ratio)
+            const monetizedViews = views * 0.6; 
+            const dailyEarnings = (monetizedViews / 1000) * cpm;
+            const monthlyEarnings = dailyEarnings * 30.41; // 平均每月天数
+            const yearlyEarnings = dailyEarnings * 365;
+
+            // 动态更新界面
+            viewsVal.textContent = views.toLocaleString('en-US');
+            cpmVal.textContent = cpm.toFixed(2);
+
+            resDay.textContent = '$' + Math.round(dailyEarnings).toLocaleString('en-US');
+            resMonth.textContent = '$' + Math.round(monthlyEarnings).toLocaleString('en-US');
+            resYear.textContent = '$' + Math.round(yearlyEarnings).toLocaleString('en-US');
+        }
+
+        viewsInput.addEventListener('input', calculateEarnings);
+        cpmInput.addEventListener('input', calculateEarnings);
+        
+        // 页面初始化执行一次
+        calculateEarnings();
+    </script>
+</body>
+</html>
