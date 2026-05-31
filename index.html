@@ -3,115 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate YouTube Money & Revenue Calculator (2026)</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Creator Revenue Calculator Pro - YouTube, Shorts & TikTok | YTCalcPro</title>
+    <meta name="description" content="The ultimate free creator money calculator. Estimate your earnings for YouTube videos, Shorts, and TikTok based on global CPM rates.">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        .glow-button { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .tab-active { border-color: #ef4444; color: #ef4444; background-color: #fef2f2; }
+        body { background-color: #fafafa; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+<body class="font-sans text-gray-800 antialiased">
 
-    <header class="bg-white border-b border-slate-200 py-4 px-6 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <span class="text-2xl">📊</span>
-                <span class="font-bold text-xl tracking-tight text-slate-900">YTCalc<span class="text-red-600">Pro</span></span>
+                <span class="font-bold text-xl tracking-tight text-gray-900">YTCalc<span class="text-red-500">Pro</span></span>
             </div>
-            <span class="text-sm bg-red-50 text-red-600 font-semibold px-3 py-1 rounded-full">Free Tool</span>
+            <button onclick="openModal()" class="glow-button bg-red-500 text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-red-600 transition-all">
+                🔥 Get AI Video Blueprint
+            </button>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
-        <div class="text-center mb-12">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">YouTube Money Calculator</h1>
-            <p class="text-slate-500 text-lg">Estimate your daily, monthly, and yearly earnings based on views and CPM.</p >
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-10 md:py-16">
+        <div class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-black text-gray-950 tracking-tight mb-4">
+                Creator Money Calculator
+            </h1>
+            <p class="text-sm md:text-base text-gray-500 max-w-2xl mx-auto font-medium">
+                Switch tabs below to estimate earnings across different platforms and target countries instantly.
+            </p >
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div class="space-y-6">
+        <!-- pSEO Tab Matrix (The Core Strategy) -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8 bg-gray-100 p-1.5 rounded-2xl max-w-3xl mx-auto">
+            <button onclick="switchTab('youtube')" id="tab-youtube" class="tab-active flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all">📹 YouTube Video</button>
+            <button onclick="switchTab('shorts')" id="tab-shorts" class="flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all text-gray-500 hover:text-gray-900">⚡ YouTube Shorts</button>
+            <button onclick="switchTab('tiktok')" id="tab-tiktok" class="flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all text-gray-500 hover:text-gray-900">🎵 TikTok Fund</button>
+            <button onclick="switchTab('country')" id="tab-country" class="flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all text-gray-500 hover:text-gray-900">🌍 CPM by Country</button>
+        </div>
+
+        <!-- Main Calculator Widget -->
+        <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-100 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+            
+            <!-- Left inputs -->
+            <div class="md:col-span-7 space-y-6">
+                <!-- Views Input -->
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Daily Video Views: <span id="views-val" class="text-red-600 font-bold">50,000</span></label>
-                    <input type="range" id="views" min="1000" max="1000000" step="1000" value="50000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600">
-                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>1K</span><span>500K</span><span>1M</span></div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label id="views-label" class="font-bold text-gray-800 text-xs uppercase tracking-wider">Daily Video Views:</label>
+                        <span id="views-display" class="text-2xl font-black text-red-500">50,000</span>
+                    </div>
+                    <input type="range" id="views-input" min="1000" max="1000000" step="1000" value="50000" class="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-red-500">
+                    <div class="flex justify-between text-xs font-bold text-gray-400 mt-2">
+                        <span>1k</span>
+                        <span>500k</span>
+                        <span>1M</span>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">Estimated CPM ($): <span id="cpm-val" class="text-red-600 font-bold">4.00</span></label>
-                    <input type="range" id="cpm" min="0.5" max="20" step="0.5" value="4" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-red-600">
-                    <div class="flex justify-between text-xs text-slate-400 mt-1"><span>$0.5</span><span>$10</span><span>$20</span></div>
+                <!-- Dynamic Input (Slider or Dropdown) -->
+                <div id="dynamic-input-container">
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="font-bold text-gray-800 text-xs uppercase tracking-wider">Estimated CPM (USD):</label>
+                        <span id="cpm-display" class="text-2xl font-black text-red-500">$4.00</span>
+                    </div>
+                    <input type="range" id="cpm-input" min="0.5" max="30" step="0.1" value="4.0" class="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-red-500">
+                    <div class="flex justify-between text-xs font-bold text-gray-400 mt-2">
+                        <span>$0.50</span>
+                        <span>$15.00</span>
+                        <span>$30.00</span>
+                    </div>
                 </div>
 
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">💡 Quick Info</h3>
-                    <p class="text-xs text-slate-500 leading-relaxed">CPM (Cost Per Mille) is the amount an advertiser pays per 1,000 views. US/UK traffic usually ranges from $4-$15, while Asian traffic might be $1-$3.</p >
+                <!-- Country Selector (Hidden by default, shown in Country Tab) -->
+                <div id="country-selector-container" class="hidden">
+                    <label class="font-bold text-gray-800 text-xs uppercase tracking-wider block mb-3">Select Target Audience Country:</label>
+                    <select id="country-select" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 font-semibold text-sm focus:outline-none focus:border-red-500">
+                        <option value="4.5" selected>🇺🇸 United States (Avg. CPM $4.50)</option>
+                        <option value="3.8">🇬🇧 United Kingdom (Avg. CPM $3.80)</option>
+                        <option value="3.5">🇯🇵 Japan (Avg. CPM $3.50)</option>
+                        <option value="1.2">🇨🇳 China / HK (Avg. CPM $1.20)</option>
+                        <option value="0.5">🇮🇳 India (Avg. CPM $0.50)</option>
+                    </select>
+                </div>
+
+                <!-- SEO Educational Text Base -->
+                <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 text-xs text-gray-500 leading-relaxed space-y-2">
+                    <p class="font-bold text-gray-800 flex items-center text-sm"><span class="mr-1.5">💡</span> Creator Insight</p >
+                    <p id="seo-text">YouTube long-form videos pay via CPM. High-tier countries like the US/UK in tech, finance, and business niches offer massive returns, making it the most profitable digital asset format globally.</p >
                 </div>
             </div>
 
-            <div class="bg-slate-900 text-white p-6 rounded-xl flex flex-col justify-between space-y-6">
+            <!-- Right Outputs -->
+            <div class="md:col-span-5 bg-gray-950 rounded-2xl p-6 md:p-8 text-white flex flex-col justify-between shadow-inner">
                 <div>
-                    <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Estimated Earnings</h2>
-                    <div class="grid grid-cols-3 gap-2 text-center">
-                        <div class="bg-slate-800 p-3 rounded-lg">
-                            <span class="block text-xs text-slate-400">Daily</span>
-                            <span id="res-day" class="text-lg md:text-xl font-bold text-green-400">$200</span>
+                    <h3 class="text-xs font-bold tracking-wider uppercase text-gray-400 mb-5">💰 Estimated Earnings (USD)</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                            <span class="text-xs font-semibold text-gray-400">Daily Income</span>
+                            <span id="revenue-day" class="text-xl font-black text-emerald-400">$200</span>
                         </div>
-                        <div class="bg-slate-800 p-3 rounded-lg">
-                            <span class="block text-xs text-slate-400">Monthly</span>
-                            <span id="res-month" class="text-lg md:text-xl font-bold text-green-400">$6,000</span>
+                        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                            <span class="text-xs font-semibold text-gray-400">Monthly Income</span>
+                            <span id="revenue-month" class="text-xl font-black text-emerald-400">$6,083</span>
                         </div>
-                        <div class="bg-slate-800 p-3 rounded-lg">
-                            <span class="block text-xs text-slate-400">Yearly</span>
-                            <span id="res-year" class="text-lg md:text-xl font-bold text-green-400">$73,000</span>
+                        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl flex justify-between items-center">
+                            <span class="text-xs font-semibold text-gray-400">Yearly Income</span>
+                            <span id="revenue-year" class="text-2xl font-black text-emerald-400">$73,000</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t border-slate-800 pt-4">
-                    <p class="text-xs text-slate-400 leading-relaxed">Note: These figures are estimates. Actual YouTube earnings vary based on video monetization rate (usually 50%-70% of total views), viewer location, and ad blockers.</p >
+                <div class="space-y-4">
+                    <button onclick="openModal()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-gray-950 font-bold py-3 rounded-xl text-center transition-all text-sm tracking-tight shadow-md">
+                        🚀 Start Earning Dollars Now
+                    </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-sm text-slate-400">
-        <p>&copy; 2026 YTCalcPro. All rights reserved. Built for global creators.</p >
-    </footer>
+    <!-- Lead Modal -->
+    <div id="leadModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50">
+        <div onclick="closeModal()" class="modal-overlay absolute w-full h-full bg-gray-950 opacity-60 backdrop-blur-sm"></div>
+        <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-2xl z-50 overflow-y-auto transform scale-95 transition-all">
+            <div class="modal-content py-6 px-6 md:px-8 text-center">
+                <p class="text-xl font-black text-gray-900 mb-2">🎁 Unlock Global Cashflow Secrets</p >
+                <p class="text-xs text-gray-500 mb-4">Learn how to build faceless AI automated channels that print dollars 24/7 without showing your face.</p >
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <p class="text-xs font-bold text-red-500 uppercase mb-2">👇 Copy & Contact Me 👇</p >
+                    <p class="text-xs text-gray-600 mb-2">Add me on WeChat or search my Little Red Book ID to claim your free guide:</p >
+                    <p class="text-lg font-black text-blue-600 bg-white py-1.5 rounded-lg border shadow-sm select-all">YOUR_ID_HERE</p >
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Core Logic Matrix -->
     <script>
-        const viewsInput = document.getElementById('views');
-        const cpmInput = document.getElementById('cpm');
+        let currentMode = 'youtube';
+        const viewsInput = document.getElementById('views-input');
+        const cpmInput = document.getElementById('cpm-input');
+        const countrySelect = document.getElementById('country-select');
         
-        const viewsVal = document.getElementById('views-val');
-        const cpmVal = document.getElementById('cpm-val');
+        const viewsDisplay = document.getElementById('views-display');
+        const cpmDisplay = document.getElementById('cpm-display');
+        const viewsLabel = document.getElementById('views-label');
         
-        const resDay = document.getElementById('res-day');
-        const resMonth = document.getElementById('res-month');
-        const resYear = document.getElementById('res-year');
+        const revDay = document.getElementById('revenue-day');
+        const revMonth = document.getElementById('revenue-month');
+        const revYear = document.getElementById('revenue-year');
+        const seoText = document.getElementById('seo-text');
 
-        function calculateEarnings() {
-            const views = parseFloat(viewsInput.value);
-            const cpm = parseFloat(cpmInput.value);
+        const modeConfigs = {
+            youtube: { text: "YouTube long-form videos pay via CPM. High-tier countries like the US/UK in tech and finance offer massive returns.", label: "Daily Video Views:" },
+            shorts: { text: "YouTube Shorts pay via the Creator Pool. CPM is generally much lower, averaging $0.02 to $0.06 per 1,000 views.", label: "Daily Shorts Views:" },
+            tiktok: { text: "TikTok monetization relies on the Creator Rewards Program. Earnings range around $0.50 - $1.00 per 1,000 qualified views.", label: "Daily TikTok Views:" },
+            country: { text: "Targeting traffic from high-CPM countries like the US, UK, and Japan can multiply your earnings by up to 10x compared to lower Tier countries.", label: "Daily Global Views:" }
+        };
 
-            // 行业标准算法：假定 60% 的播放量成功展示了广告 (Monetized Views Ratio)
-            const monetizedViews = views * 0.6; 
-            const dailyEarnings = (monetizedViews / 1000) * cpm;
-            const monthlyEarnings = dailyEarnings * 30.41; // 平均每月天数
-            const yearlyEarnings = dailyEarnings * 365;
+        function switchTab(mode) {
+            currentMode = mode;
+            ['youtube', 'shorts', 'tiktok', 'country'].forEach(m => {
+                document.getElementById(`tab-${m}`).className = m === mode ? 
+                    "tab-active flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all" : 
+                    "flex-1 min-w-[140px] text-center font-bold text-xs md:text-sm py-2.5 px-4 rounded-xl transition-all text-gray-500 hover:text-gray-900";
+            });
 
-            // 动态更新界面
-            viewsVal.textContent = views.toLocaleString('en-US');
-            cpmVal.textContent = cpm.toFixed(2);
+            document.getElementById('dynamic-input-container').style.display = mode === 'country' ? 'none' : 'block';
+            document.getElementById('country-selector-container').className = mode === 'country' ? 'block' : 'hidden';
+            
+            if (mode === 'shorts') { cpmInput.value = 0.04; cpmInput.min = 0.01; cpmInput.max = 0.2; cpmInput.step = 0.01; }
+            else if (mode === 'tiktok') { cpmInput.value = 0.75; cpmInput.min = 0.1; cpmInput.max = 2.0; cpmInput.step = 0.05; }
+            else if (mode === 'youtube') { cpmInput.value = 4.0; cpmInput.min = 0.5; cpmInput.max = 30; cpmInput.step = 0.1; }
 
-            resDay.textContent = '$' + Math.round(dailyEarnings).toLocaleString('en-US');
-            resMonth.textContent = '$' + Math.round(monthlyEarnings).toLocaleString('en-US');
-            resYear.textContent = '$' + Math.round(yearlyEarnings).toLocaleString('en-US');
+            viewsLabel.innerText = modeConfigs[mode].label;
+            seoText.innerText = modeConfigs[mode].text;
+            updateCalculations();
         }
 
-        viewsInput.addEventListener('input', calculateEarnings);
-        cpmInput.addEventListener('input', calculateEarnings);
+        function updateCalculations() {
+            const views = parseInt(viewsInput.value);
+            let cpm = currentMode === 'country' ? parseFloat(countrySelect.value) : parseFloat(cpmInput.value);
+
+            viewsDisplay.innerText = views.toLocaleString('en-US');
+            cpmDisplay.innerText = `$${cpm.toFixed(2)}`;
+
+            const dayEarn = (views / 1000) * cpm;
+            const monthEarn = dayEarn * 30.416;
+            const yearEarn = dayEarn * 365;
+
+            revDay.innerText = `$${Math.round(dayEarn).toLocaleString('en-US')}`;
+            revMonth.innerText = `$${Math.round(monthEarn).toLocaleString('en-US')}`;
+            revYear.innerText = `$${Math.round(yearEarn).toLocaleString('en-US')}`;
+        }
+
+        viewsInput.addEventListener('input', updateCalculations);
+        cpmInput.addEventListener('input', updateCalculations);
+        countrySelect.addEventListener('change', updateCalculations);
+
+        function openModal() { document.getElementById('leadModal').classList.remove('opacity-0', 'pointer-events-none'); }
+        function closeModal() { document.getElementById('leadModal').classList.add('opacity-0', 'pointer-events-none'); }
         
-        // 页面初始化执行一次
-        calculateEarnings();
+        updateCalculations();
     </script>
 </body>
 </html>
