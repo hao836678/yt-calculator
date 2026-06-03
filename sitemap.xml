@@ -13,4 +13,9 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-</urlset>
+<url>
+<loc>https://yt-calculator.vercel.app/youtube-shorts-calculator.html</loc>
+<lastmod>2026-06-03</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url></urlset>
