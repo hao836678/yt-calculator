@@ -1,23 +1,70 @@
+
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TikTok Money Calculator (2026) - Estimate Creator Earnings</title><meta name="description" content="Free TikTok Money Calculator. Estimate TikTok creator earnings using views and engagement."></head><body><h1>TikTok Money Calculator</h1><p>
-Estimate how much money TikTok creators can earn based on views, engagement and audience location.
-</p ><h2>How Much Does TikTok Pay?</h2><p>
-TikTok earnings vary depending on creator rewards programs, sponsorships, affiliate income and audience demographics.
-</p ><h2>Estimated Earnings Examples</h2><ul>
-<li>100,000 views = $2 - $50</li>
-<li>1,000,000 views = $20 - $500</li>
-<li>10,000,000 views = $200 - $5,000+</li>
-</ul><h2>Factors Affecting TikTok Revenue</h2><ul>
-<li>Country</li>
-<li>Niche</li>
-<li>Engagement Rate</li>
-<li>Brand Deals</li>
-</ul><p>
-Try our YouTube tools:
-<a href="/">YouTube Money Calculator</a >
-</p ><p>
-<a href="/youtube-cpm-calculator.html">YouTube CPM Calculator</a >
-</p ></body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>YouTube Shorts Calculator (2026)</title><meta name="description" content="Free YouTube Shorts Calculator. Estimate Shorts earnings instantly."><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-gray-50 font-sans"><div class="max-w-4xl mx-auto px-4 py-12"><h1 class="text-4xl font-black text-center mb-8">
+YouTube Shorts Calculator
+</h1><div class="bg-white rounded-2xl shadow-lg p-8"><label class="block font-bold mb-2">
+Shorts Views
+</label><input
+type="range"
+id="views"
+min="10000"
+max="10000000"
+step="10000"
+value="1000000"
+class="w-full"
+/>
+
+<p class="mt-2 mb-6">
+<span id="viewsValue">1,000,000</span> Views
+</p ><label class="block font-bold mb-2">
+Shorts RPM ($)
+</label><input
+type="range"
+id="rpm"
+min="0.01"
+max="0.20"
+step="0.01"
+value="0.05"
+class="w-full"
+/>
+
+<p class="mt-2 mb-6">
+$<span id="rpmValue">0.05</span>
+</p ><div class="bg-green-100 rounded-xl p-6 text-center"><p class="text-lg font-bold">
+Estimated Shorts Revenue
+</p ><p id="result" class="text-4xl font-black text-green-700">
+$50
+</p ></div></div><div class="mt-10 text-center">
+<a href=" " class="text-blue-600 underline">
+Back to Main Calculator
+</a >
+</div></div><script>
+
+const views=document.getElementById('views');
+const rpm=document.getElementById('rpm');
+
+const viewsValue=document.getElementById('viewsValue');
+const rpmValue=document.getElementById('rpmValue');
+const result=document.getElementById('result');
+
+function update(){
+
+const v=parseInt(views.value);
+const r=parseFloat(rpm.value);
+
+viewsValue.innerText=v.toLocaleString();
+rpmValue.innerText=r.toFixed(2);
+
+result.innerText='$'+Math.round((v/1000)*r).toLocaleString();
+
+}
+
+views.addEventListener('input',update);
+rpm.addEventListener('input',update);
+
+update();
+
+</script></body>
 </html>
