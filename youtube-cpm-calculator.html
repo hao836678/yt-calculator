@@ -1,21 +1,77 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>YouTube CPM Calculator (2026) - Estimate Revenue by CPM</title><meta name="description" content="Free YouTube CPM Calculator. Estimate creator revenue using CPM, views and audience location."></head><body><h1>YouTube CPM Calculator</h1><p>
-Use this free YouTube CPM Calculator to estimate how much money a YouTube channel can earn based on CPM and views.
-</p ><h2>How CPM Works</h2><p>
-CPM means Cost Per Mille, which is the amount advertisers pay for 1,000 ad impressions.
-</p ><h2>Average YouTube CPM by Country</h2><ul>
-<li>USA: $4 - $15</li>
-<li>UK: $3 - $12</li>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>YouTube CPM Calculator (2026)</title><meta name="description" content="Free YouTube CPM Calculator. Estimate YouTube earnings using CPM and views."><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-gray-50 font-sans"><div class="max-w-4xl mx-auto px-4 py-12"><h1 class="text-4xl font-black text-center mb-8">
+YouTube CPM Calculator
+</h1><div class="bg-white rounded-2xl shadow-lg p-8"><label class="block font-bold mb-2">
+Daily Views
+</label><input
+type="range"
+id="views"
+min="1000"
+max="1000000"
+step="1000"
+value="100000"
+class="w-full"
+/>
+
+<p class="mt-2 mb-6">
+<span id="viewsValue">100,000</span> Views
+</p ><label class="block font-bold mb-2">
+CPM ($)
+</label><input
+type="range"
+id="cpm"
+min="0.5"
+max="30"
+step="0.1"
+value="4"
+class="w-full"
+/>
+
+<p class="mt-2 mb-6">
+$<span id="cpmValue">4.0</span>
+</p ><div class="bg-green-100 rounded-xl p-6 text-center"><p class="text-lg font-bold">
+Estimated Revenue
+</p ><p id="result" class="text-4xl font-black text-green-700">
+$400
+</p ></div><div class="mt-8"><h2 class="text-xl font-bold mb-3">
+Average CPM by Country
+</h2><ul class="list-disc pl-6">
+<li>United States: $4 - $15</li>
+<li>United Kingdom: $3 - $12</li>
 <li>Canada: $3 - $10</li>
 <li>Australia: $4 - $12</li>
 <li>India: $0.5 - $2</li>
-</ul><p>
-Back to the main calculator:
-<a href="/">YouTube Money Calculator</a >
-</p ><p>
-Need to estimate total earnings? Try our
-<a href="/">YouTube Money Calculator</a >.
-</p ></body>
+</ul></div></div><div class="mt-10 text-center">
+<a href=" " class="text-blue-600 underline">
+Back to Main Calculator
+</a >
+</div></div><script>
+
+const views=document.getElementById('views');
+const cpm=document.getElementById('cpm');
+
+const viewsValue=document.getElementById('viewsValue');
+const cpmValue=document.getElementById('cpmValue');
+const result=document.getElementById('result');
+
+function update(){
+
+const v=parseInt(views.value);
+const c=parseFloat(cpm.value);
+
+viewsValue.innerText=v.toLocaleString();
+cpmValue.innerText=c.toFixed(1);
+
+result.innerText='$'+Math.round((v/1000)*c).toLocaleString();
+
+}
+
+views.addEventListener('input',update);
+cpm.addEventListener('input',update);
+
+update();
+
+</script></body>
 </html>
