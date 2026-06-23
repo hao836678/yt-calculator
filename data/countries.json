@@ -1,0 +1,29 @@
+[
+{
+"country": "Australia",
+"slug": "australia",
+"avg_cpm": "$5 - $13",
+"finance_cpm": "$15 - $40+",
+"business_cpm": "$10 - $30+",
+"tech_cpm": "$8 - $20+",
+"entertainment_cpm": "$3 - $8"
+},
+{
+"country": "USA",
+"slug": "usa",
+"avg_cpm": "$6 - $18",
+"finance_cpm": "$20 - $50+",
+"business_cpm": "$12 - $35+",
+"tech_cpm": "$10 - $25+",
+"entertainment_cpm": "$4 - $10"
+},
+{
+"country": "Germany",
+"slug": "germany",
+"avg_cpm": "$4 - $9",
+"finance_cpm": "$12 - $30+",
+"business_cpm": "$8 - $20+",
+"tech_cpm": "$6 - $18+",
+"entertainment_cpm": "$2 - $6"
+}
+]
