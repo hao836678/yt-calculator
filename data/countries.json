@@ -26,4 +26,13 @@
 "tech_cpm": "$6 - $18+",
 "entertainment_cpm": "$2 - $6"
 }
+{
+"country": "Poland",
+"slug": "poland",
+"avg_cpm": "$2 - $6",
+"finance_cpm": "$8 - $20+",
+"business_cpm": "$5 - $12+",
+"tech_cpm": "$4 - $10+",
+"entertainment_cpm": "$1 - $4"
+}
 ]
